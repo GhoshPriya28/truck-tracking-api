@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('../partials/head-style'); %>
+</head>
+
+<body>
+  <%- include('../partials/top-header'); %>
+  <%- include('../partials/sidebar'); %>
+
+  <div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+      <div class="min-height-200px">
+        <div class="page-header">
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="title">
+                <h4>User Detail</h4>
+              </div>
+              <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">User Detail</li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <!-- User Detail section -->
+        <div class="card-box mb-30 pd-20">
+          <div class="pb-20">
+            <table class="user-detail-table table nowrap">
+              <thead> <b>User Details</b>
+                <tr>
+                  <th>User Id</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Email</th>
+                  <th>Contact Number</th>
+                  <th>Trade Name</th>
+                  <th>Physical Address</th>
+                  <th>Country</th>
+                  <th>Postal Code</th>
+                  <th>Company Registration Number</th>
+                  <th>Telephone Number</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%= user.id %></td>
+                  <td><%= user.name %></td>
+                  <td><%= user.role %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.contact_num %></td>
+                  <td><%= user.trade_name %></td>
+                  <td><%= user.physical_address %></td>
+                  <td><%= user.country %></td>
+                  <td><%= user.postal_code %></td>
+                  <td><%= user.com_reg_num %></td>
+                  <td><%= user.tel_number %></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Manager Detail section -->
+        <% if (managerData) { %>
+        <div class="card-box mb-30 pd-20">
+          <div class="pb-20">
+            <table class="manager-detail-table table nowrap">
+              <thead><b>Manager Details</b>
+                <tr>
+                  <th>Full Name</th>
+                  <th>Email</th>
+                  <th>Contact Number</th>
+                  <th>ISD Code</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%= managerData.full_name %></td>
+                  <td><%= managerData.email %></td>
+                  <td><%= managerData.contact_num %></td>
+                  <td><%= managerData.isd_code %></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <% } %>
+
+        <!-- Truck Park Detail section -->
+        <% if (truckParkData) { %>
+        <div class="card-box mb-30 pd-20">
+          <div class="pb-20">
+            <table class="truck-park-detail-table table nowrap">
+              <thead><b>Truck Parking Address Details</b>
+                <tr>
+                  <th>Address</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% truckParkData.forEach(function(truckPark) { %>
+                <tr>
+                  <td><%= truckPark.address %></td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../partials/footer'); %>
+</body>
+
+</html>

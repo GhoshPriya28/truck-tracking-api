@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<%- include('../partials/head-style'); %>
+</head>
+
+<body>
+
+	<%- include('../partials/top-header'); %>
+	<%- include('../partials/sidebar'); %>
+
+	<div class="main-container">
+		<div class="xs-pd-20-10 pd-ltr-20">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-6 col-sm-12">
+						<div class="title">
+							<h4>Welcome to the Dashboard</h4>
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="dashboard">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">
+									Dashboard
+								</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+			
+				<div class="col-md-6">
+					<div class="card-box">
+						<h2>Overview</h2>
+						<p>Add your overview content.</p>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card-box">
+						<h2>Statistics</h2>
+						<p>Add your statistics content.</p>
+					</div>
+				</div>
+			</div>
+			<div class="footer-wrap pd-20 mb-20 card-box">
+				Admin Panel
+				<a href="javascript:;" target="_blank">Tycho Technologies Pvt. Ltd.</a>
+			</div>
+		</div>
+	</div>
+	<%- include('../partials/footer'); %>
+</body>
+
+</html>

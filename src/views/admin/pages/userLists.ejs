@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('../partials/head-style'); %>
+    <style>
+      .user-list table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #e0e0e0;
+      }
+
+      .user-list th,
+      .user-list td {
+        padding: 12px 15px;
+        text-align: left;
+        border: 1px solid #e0e0e0;
+      }
+
+      .user-list th {
+        background-color: #afe8e5;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .user-list tbody tr:nth-child(even) {
+        background-color: #fafafa;
+      }
+
+      .user-list tbody tr:hover {
+        background-color: #f0f0f0;
+      }
+
+      .user-list .view-button {
+        display: inline-block;
+        padding: 6px 12px;
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+        background-color: transparent;
+        color: #4CAF50;
+        border: 2px solid #4CAF50;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .user-list .view-button:hover {
+        background-color: #4CAF50;
+        color: #fff;
+      }
+
+      .search-bar {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .search-bar form {
+        display: flex;
+        align-items: center;
+      }
+
+      .search-bar input[type="text"],
+      .search-bar button[type="submit"] {
+        margin-left: 10px;
+        padding: 6px 10px;
+        font-size: 14px;
+        border: none;
+        border-radius: 4px;
+      }
+
+      .search-bar button[type="submit"] {
+        background-color: #47bcd9;
+        color: #fff;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .pagination a {
+        color: #333;
+        text-decoration: none;
+        padding: 8px 16px;
+        transition: background-color 0.3s;
+      }
+
+      .pagination a.active {
+        background-color: #4CAF50;
+        color: white;
+      }
+    </style>
+</head>
+
+<body>
+  <%- include('../partials/top-header'); %>
+    <%- include('../partials/sidebar'); %>
+      <div class="main-container">
+        <div class="xs-pd-20-10 pd-ltr-20">
+          <div class="page-header">
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <div class="title">
+                  <h4>User List</h4>
+                </div>
+                <nav aria-label="breadcrumb" role="navigation">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="dashboard">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">User List</li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+          <div class="user-list">
+            <div class="search-bar">
+              <form action="/userLists" method="GET">
+                <input type="text" name="search" placeholder="Search...">
+                <button type="submit">Search</button>
+              </form>
+            </div>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Email</th>
+                  <th>Contact Number</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (users.length> 0) { %>
+                  <% users.forEach(function(user) { %>
+                    <tr>
+                      <td>
+                        <%= user.id %>
+                      </td>
+                      <td>
+                        <%= user.name %>
+                      </td>
+                      <td>
+                        <%= user.role %>
+                      </td>
+                      <td>
+                        <%= user.email %>
+                      </td>
+                      <td>
+                        <%= user.contact_num %>
+                      </td>
+                      <td>
+                        <form action="/userdetail/<%= user.id %>" method="GET">
+                          <button class="view-button" type="submit">View</button>
+                        </form>
+                      </td>
+                    </tr>
+                    <% }) %>
+                      <% } else { %>
+                        <tr>
+                          <td colspan="6">No users found.</td>
+                        </tr>
+                        <% } %>
+              </tbody>
+            </table>
+
+            <!-- Pagination starting-->
+            <% if (totalPages> 1) { %>
+              <div class="pagination">
+                <% const baseUrl='/userLists' ; %>
+                  <% const previousPage=page> 1 ? page - 1 : 1; %>
+                    <% const nextPage=page < totalPages ? page + 1 : totalPages; %>
+                      <a href="<%= `${baseUrl}?page=1&limit=${limit}&search=${search}` %>">First</a>
+                      <a href="<%= `${baseUrl}?page=${previousPage}&limit=${limit}&search=${search}` %>">Previous</a>
+                      <% for (let i=1; i <=totalPages; i++) { %>
+                        <a class="<%= i === page ? 'active' : '' %>"
+                          href="<%= `${baseUrl}?page=${i}&limit=${limit}&search=${search}` %>">
+                          <%= i %>
+                        </a>
+                        <% } %>
+                          <a href="<%= `${baseUrl}?page=${nextPage}&limit=${limit}&search=${search}` %>">Next</a>
+                          <a href="<%= `${baseUrl}?page=${totalPages}&limit=${limit}&search=${search}` %>">Last</a>
+              </div>
+              <% } %>
+          </div>
+        </div>
+      </div>
+      <%- include('../partials/footer'); %>
+</body>
+
+</html>
